@@ -61,3 +61,8 @@ Total Files: 97 files
 Total Tokens: 65,615 tokens
 Total Chars: 262,721 chars
 Context:~43.1K
+
+Cost for multi lists fiture:
+claude-4.6-sonnet-high-thinking (121 351 * 3$ / 1000000) + (945 783 * 0.3$ / 1000000) + (5551 * 15$ / 1000000) = 0.73$
+composer-2.5 ( 461 280 * 0.5$ / 1000000) +  (4 292 * 2.5$) = 0.24$
+Висновок: Модель claude-4.6-sonnet-high-thinking в тричі дорожча за composer-2.5
