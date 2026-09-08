@@ -55,19 +55,31 @@ function createDefaultState(): AppState {
   };
 }
 
+function isValidTodo(value: unknown): value is Todo {
+  if (typeof value !== "object" || value === null) return false;
+  const todo = value as Record<string, unknown>;
+  return (
+    typeof todo.id === "string" &&
+    typeof todo.text === "string" &&
+    typeof todo.completed === "boolean"
+  );
+}
+
 function isValidState(value: unknown): value is AppState {
   if (typeof value !== "object" || value === null) return false;
   const obj = value as Record<string, unknown>;
   if (!Array.isArray(obj.lists)) return false;
   if (typeof obj.selectedListId !== "string") return false;
-  return obj.lists.every(
-    (item) =>
-      typeof item === "object" &&
-      item !== null &&
-      typeof (item as Record<string, unknown>).id === "string" &&
-      typeof (item as Record<string, unknown>).name === "string" &&
-      Array.isArray((item as Record<string, unknown>).todos),
-  );
+  return obj.lists.every((item) => {
+    if (typeof item !== "object" || item === null) return false;
+    const list = item as Record<string, unknown>;
+    return (
+      typeof list.id === "string" &&
+      typeof list.name === "string" &&
+      Array.isArray(list.todos) &&
+      list.todos.every(isValidTodo)
+    );
+  });
 }
 
 export function loadState(): AppState {

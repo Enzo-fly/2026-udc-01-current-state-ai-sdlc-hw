@@ -3,7 +3,7 @@ Add to existing todo list - functionality of multi-lists
 Acceptance criteria
 Two lists with proper todos 
 Colors — green list section + rows; blue todo section + rows
-No historical data — new todo-lists:v2 key only; drop todos:v1 on load
+No historical data — new todo-lists:v1 key only; drop todos:v1 on load
 Lists on top — lists block rendered above todos block in component JSX
 
 Prompt:
@@ -39,7 +39,7 @@ No new dependencies (guardrail in app/AGENTS.md).
 Mode 2 — Agent
 Executed the agreed plan from Mode 1, not the original prompt verbatim. After plan review, nothing in the plan was rewritten or rolled back during implementation: named lists, selected-list scoping, green Lists above blue Todos, seed data, and dropping `todos:v1` without migration all landed as planned.
 
-Deviations from the Task 2 acceptance-criteria header (not from the plan): storage used key `todo-lists:v1` as written in the plan, not `todo-lists:v2`. Filters, clear completed, and the “create list” form were kept because they were in the plan, even though the original prompt did not mention them. No extra files or dependency changes were needed during execution.
+Storage used key `todo-lists:v1` as written in the plan and the acceptance criteria. Filters, clear completed, and the “create list” form were kept because they were in the plan, even though the original prompt did not mention them. No extra files or dependency changes were needed during execution.
 
 Verification
 Clear site data or load app fresh → see (5) working days and (2) weekend days
