@@ -7,8 +7,6 @@ tags: rendering, script, defer, async, performance
 
 ## Use defer or async on Script Tags
 
-**Impact: HIGH (eliminates render-blocking)**
-
 Script tags without `defer` or `async` block HTML parsing while the script downloads and executes. This delays First Contentful Paint and Time to Interactive.
 
 - **`defer`**: Downloads in parallel, executes after HTML parsing completes, maintains execution order
