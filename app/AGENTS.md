@@ -11,6 +11,7 @@ Available Commands
 
     npm run dev — Starts the development server locally.
     npm run build — Builds the application for production production.
+    npm test — Runs the TypeScript typecheck.
     npm run start — Starts a Next.js production server.
     npm run lint — Runs ESLint to check for code style issues.
 

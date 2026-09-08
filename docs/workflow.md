@@ -6,20 +6,21 @@ Colors — green list section + rows; blue todo section + rows
 No historical data — new todo-lists:v2 key only; drop todos:v1 on load
 Lists on top — lists block rendered above todos block in component JSX
 
-Promt:
-Please add to existing todo list functionality to create saparete todo lists with possibility to name it and in front of each name of todo list should be reflected number of todo which it contains.
+Prompt:
+Please add to existing todo list functionality to create separate todo lists with possibility to name it and in front of each name of todo list should be reflected number of todo which it contains.
 block with named lists should be placed above block which reflect todos inside. 
-Lists of dotos should be colored by green
+Lists of todos should be colored by green
 Todos itself be colored by blue
 Do not migrate existing data - delete it.
 And create two list:
 1 Name working days, in this list add names of working days
 2. Name weekend days, in this list add names of weekend days
-Acceptance critera:
-1. Two lists with proper todos inside
-2. Lists and todos colored properly
+Acceptance criteria:
+1. Two lists with the correct todos inside (working days and weekend days)
+2. Lists and their rows are green; todos and their rows are blue
 3. No historical data
-4. Lists placed on top of todos
+4. Lists block is placed above the todos block
+
 Mode 1 — Plan
 Asked the agent to produce a plan before writing code. Agreed plan:
 
@@ -36,7 +37,9 @@ No routing or config changes (page.tsx, layout.tsx, next.config.ts untouched).
 No new dependencies (guardrail in app/AGENTS.md).
 
 Mode 2 — Agent
-Execute promt
+Executed the agreed plan from Mode 1, not the original prompt verbatim. After plan review, nothing in the plan was rewritten or rolled back during implementation: named lists, selected-list scoping, green Lists above blue Todos, seed data, and dropping `todos:v1` without migration all landed as planned.
+
+Deviations from the Task 2 acceptance-criteria header (not from the plan): storage used key `todo-lists:v1` as written in the plan, not `todo-lists:v2`. Filters, clear completed, and the “create list” form were kept because they were in the plan, even though the original prompt did not mention them. No extra files or dependency changes were needed during execution.
 
 Verification
 Clear site data or load app fresh → see (5) working days and (2) weekend days

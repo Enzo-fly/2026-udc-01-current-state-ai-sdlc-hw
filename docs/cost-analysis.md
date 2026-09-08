@@ -64,5 +64,11 @@ Context:~43.1K
 
 Cost for multi lists fiture:
 claude-4.6-sonnet-high-thinking (121 351 * 3$ / 1000000) + (945 783 * 0.3$ / 1000000) + (5551 * 15$ / 1000000) = 0.73$
-composer-2.5 ( 461 280 * 0.5$ / 1000000) +  (4 292 * 2.5$) = 0.24$
+composer-2.5 (461 280 * 0.5$ / 1000000) + (4 292 * 2.5$ / 1000000) = 0.24$
+
+Legend (USD per 1,000,000 tokens):
+- claude-4.6-sonnet-high-thinking: 121 351 input × $3, 945 783 cache read × $0.30, 5 551 output × $15
+- composer-2.5: 461 280 input × $0.50, 4 292 output × $2.50
+- Neither line includes cache write; composer-2.5 usage had no cache-read tokens.
+
 Висновок: Модель claude-4.6-sonnet-high-thinking в тричі дорожча за composer-2.5
