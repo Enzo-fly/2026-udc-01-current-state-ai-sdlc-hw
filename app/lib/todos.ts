@@ -70,7 +70,7 @@ function isValidState(value: unknown): value is AppState {
   const obj = value as Record<string, unknown>;
   if (!Array.isArray(obj.lists)) return false;
   if (typeof obj.selectedListId !== "string") return false;
-  return obj.lists.every((item) => {
+  const listsValid = obj.lists.every((item) => {
     if (typeof item !== "object" || item === null) return false;
     const list = item as Record<string, unknown>;
     return (
@@ -80,6 +80,10 @@ function isValidState(value: unknown): value is AppState {
       list.todos.every(isValidTodo)
     );
   });
+  if (!listsValid) return false;
+  return obj.lists.some(
+    (item) => (item as Record<string, unknown>).id === obj.selectedListId,
+  );
 }
 
 export function loadState(): AppState {
