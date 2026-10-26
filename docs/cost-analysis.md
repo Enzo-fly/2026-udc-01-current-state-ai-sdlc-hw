@@ -15,7 +15,7 @@ Repo size measured after each step. Pack Summary1–8 labels match the original 
 
 Key rows for the conclusions: Summary3 (largest pack with leftover repomix) vs Summary4 (after cleanup). Feature session cost below is billed model usage, not these pack totals.
 
-Cost for multi lists fiture:
+Cost for multi lists feature:
 claude-4.6-sonnet-high-thinking (121 351 * 3$ / 1000000) + (945 783 * 0.3$ / 1000000) + (5551 * 15$ / 1000000) = 0.73$
 composer-2.5 (461 280 * 0.5$ / 1000000) + (4 292 * 2.5$ / 1000000) = 0.24$
 

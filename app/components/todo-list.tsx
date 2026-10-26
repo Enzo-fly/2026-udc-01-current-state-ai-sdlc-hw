@@ -166,6 +166,7 @@ export const TodoList = () => {
                   <button
                     type="button"
                     onClick={() => handleSelectList(list.id)}
+                    aria-pressed={isSelected}
                     className={`w-full rounded-lg border px-4 py-2.5 text-left text-sm font-medium transition-colors ${
                       isSelected
                         ? "border-green-500 bg-green-200 text-green-900 dark:border-green-600 dark:bg-green-800/60 dark:text-green-100"
