@@ -55,16 +55,7 @@ Reference these guidelines when:
 
 ### 3. Server-Side Performance (HIGH)
 
-- `server-auth-actions` - Authenticate server actions like API routes
-- `server-cache-react` - Use React.cache() for per-request deduplication
-- `server-cache-lru` - Use LRU cache for cross-request caching
-- `server-dedup-props` - Avoid duplicate serialization in RSC props
-- `server-hoist-static-io` - Hoist static I/O (fonts, logos) to module level
-- `server-no-shared-module-state` - Avoid module-level mutable request state in RSC/SSR
-- `server-serialization` - Minimize data passed to client components
-- `server-parallel-fetching` - Restructure components to parallelize fetches
-- `server-parallel-nested-fetching` - Chain nested fetches per item in Promise.all
-- `server-after-nonblocking` - Use after() for non-blocking operations
+Individual `server-` rule files are not included in this project (client-only app). See section 3 of `AGENTS.md` for the full text if needed.
 
 ### 4. Client-Side Data Fetching (MEDIUM-HIGH)
 
