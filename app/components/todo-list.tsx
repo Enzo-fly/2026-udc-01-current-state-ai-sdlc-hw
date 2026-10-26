@@ -5,7 +5,9 @@ import {
   createList,
   createTodo,
   loadState,
+  parseState,
   saveState,
+  STORAGE_KEY,
   type AppState,
   type TodoFilter,
 } from "@/lib/todos";
@@ -22,6 +24,7 @@ export const TodoList = () => {
   const [listDraft, setListDraft] = useState("");
   const [todoDraft, setTodoDraft] = useState("");
   const [filter, setFilter] = useState<TodoFilter>("all");
+  const [saveFailed, setSaveFailed] = useState(false);
 
   useEffect(() => {
     setState(loadState());
@@ -30,9 +33,20 @@ export const TodoList = () => {
 
   useEffect(() => {
     if (hydrated) {
-      saveState(state);
+      setSaveFailed(!saveState(state));
     }
   }, [state, hydrated]);
+
+  // Pick up changes saved by other tabs so a stale copy doesn't overwrite them.
+  useEffect(() => {
+    const handleStorage = (event: StorageEvent) => {
+      if (event.key !== STORAGE_KEY) return;
+      const next = parseState(event.newValue);
+      if (next) setState(next);
+    };
+    window.addEventListener("storage", handleStorage);
+    return () => window.removeEventListener("storage", handleStorage);
+  }, []);
 
   const selectedList = state.lists.find((l) => l.id === state.selectedListId) ?? null;
 
@@ -45,6 +59,7 @@ export const TodoList = () => {
       lists: [...curr.lists, newList],
       selectedListId: newList.id,
     }));
+    setFilter("all");
     setListDraft("");
   }, [listDraft]);
 
@@ -123,7 +138,14 @@ export const TodoList = () => {
           Todo lists
         </h1>
         <p className="mt-2 text-zinc-600 dark:text-zinc-400">
-          Manage named lists and their todos. Saved in this browser.
+          Manage named lists and their todos.{" "}
+          {saveFailed ? (
+            <span role="alert" className="font-medium text-red-600 dark:text-red-400">
+              Not saved — browser storage unavailable.
+            </span>
+          ) : (
+            "Saved in this browser."
+          )}
         </p>
       </header>
 

@@ -17,7 +17,7 @@ export type AppState = {
 
 export type TodoFilter = "all" | "active" | "completed";
 
-const STORAGE_KEY = "todo-lists:v1";
+export const STORAGE_KEY = "todo-lists:v1";
 const LEGACY_KEY = "todos:v1";
 
 export function createTodo(text: string): Todo {
@@ -86,6 +86,16 @@ function isValidState(value: unknown): value is AppState {
   );
 }
 
+export function parseState(raw: string | null): AppState | null {
+  if (!raw) return null;
+  try {
+    const parsed: unknown = JSON.parse(raw);
+    return isValidState(parsed) ? parsed : null;
+  } catch {
+    return null;
+  }
+}
+
 export function loadState(): AppState {
   if (typeof window === "undefined") {
     return createDefaultState();
@@ -98,13 +108,8 @@ export function loadState(): AppState {
   }
 
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) {
-      const parsed: unknown = JSON.parse(raw);
-      if (isValidState(parsed)) {
-        return parsed;
-      }
-    }
+    const stored = parseState(localStorage.getItem(STORAGE_KEY));
+    if (stored) return stored;
   } catch {
     // fall through to defaults
   }
@@ -112,10 +117,13 @@ export function loadState(): AppState {
   return createDefaultState();
 }
 
-export function saveState(state: AppState): void {
+export function saveState(state: AppState): boolean {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-  } catch {
-    // Ignore quota errors and private browsing restrictions.
+    return true;
+  } catch (error) {
+    // Quota errors and private browsing restrictions: report, don't throw.
+    console.warn("Failed to save todo lists to localStorage", error);
+    return false;
   }
 }
